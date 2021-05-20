@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t fimperioli/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true fimperioli/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t fimperioli/multi-docker-client ./client
+  - docker build -t fimperioli/multi-docker-server ./server
+  - docker build -t fimperioli/multi-docker-worker ./worker
+  - docker build -t fimperioli/multi-docker-nginx ./nginx
+  #login to docker cli using env variables and only a single command
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #push to docker hub using docker cli login
+  - docker push fimperioli/multi-docker-client
+  - docker push fimperioli/multi-docker-server
+  - docker push fimperioli/multi-docker-worker
+  - docker push fimperioli/multi-docker-nginx
