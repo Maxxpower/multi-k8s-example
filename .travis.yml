@@ -14,7 +14,7 @@ after_success:
   - docker build -t fimperioli/multi-docker-worker ./worker
   - docker build -t fimperioli/multi-docker-nginx ./nginx
   #login to docker cli using env variables and only a single command
-  - docker login --username "$DOCKER_ID" --password "$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | winpty docker login -u "$DOCKER_ID" --password-stdin
   #push to docker hub using docker cli login
   - docker push fimperioli/multi-docker-client
   - docker push fimperioli/multi-docker-server
