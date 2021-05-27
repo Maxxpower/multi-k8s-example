@@ -5,25 +5,31 @@
             "name" : "client",
             "image" : "fimperioli/multi-docker-client",
             "hostname" : "client",
-            "essential" : false
+            "essential" : false,
+            "memory" : 128
         },
         {
             "name" : "server",
             "image" : "fimperioli/multi-docker-server",
             "hostname" : "api",
-            "essential" : false
+            "essential" : false,
+            "memory" : 128
+
         },
         {
             "name" : "worker",
             "image" : "fimperioli/multi-docker-worker",
             "hostname" : "worker",
-            "essential" : false
+            "essential" : false,
+            "memory" : 128
+
         },
         {
             "name" : "nginx",
             "image" : "fimperioli/multi-docker-nginx",
             "hostname" : "nginx",
             "essential" : true,
+            "memory" : 128,
             "portMappings" : [
                 {
                     "hostPort" : 80,
