@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion" : 2,
+    "containerDefinitions": [
+        {
+            "name" : "client",
+            "image" : "fimperioli/multi-docker-client",
+            "hostname" : "client",
+            "essential" : false
+        },
+        {
+            "name" : "server",
+            "image" : "fimperioli/multi-docker-server",
+            "hostname" : "api",
+            "essential" : false
+        },
+        {
+            "name" : "worker",
+            "image" : "fimperioli/multi-docker-worker",
+            "hostname" : "worker",
+            "essential" : false
+        },
+        {
+            "name" : "nginx",
+            "image" : "fimperioli/multi-docker-nginx",
+            "hostname" : "nginx",
+            "essential" : true,
+            "portMappings" : [
+                {
+                    "hostPort" : 80,
+                    "containerPort" : 80
+                }
+            ],
+            "links" : ["client","server"]
+        }
+    ]
+}
