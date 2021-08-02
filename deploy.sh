@@ -12,7 +12,7 @@ docker push fimperioli/multi-worker:$SHA
 #apply all the k8s configs
 kubectl apply -f k8s
 #imperative command to set the latest image, 
-#we need to generate unique tags for each image the re-apply the deployments
+#we need to generate unique tags for each image the re-apply the deployments f.i.
 kubectl set image deployments/server-deployment server=fimperioli/multi-server:$SHA
 kubectl set image deployments/client-deployment client=fimperioli/multi-client:$SHA
 kubectl set image deployments/worker-deployment worker=fimperioli/multi-worker:$SHA
